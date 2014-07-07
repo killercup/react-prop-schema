@@ -15,7 +15,7 @@ Let's say you have a data structure, represented by the following JSON:
 }
 ```
 
-Everything is fine, but you are a skeptic, so you want to validate this data. Let's assume you have a tool that does that using the following description:
+Everything is fine, but you are a skeptic, so you want to validate this data. Let's assume you have a tool that can validate this data using the following schema description:
 
 ```json
 {
@@ -30,7 +30,13 @@ That's what this experiment is all about. I wanted to create such a validation t
 
 And: Good news, everyone! It works<sup>*</sup>!
 
-<sup>*</sup> Sometimes.
+```js
+var ps = require('./prop_schema')
+ps.sample({name: {type: "string"}, level: {type: "number", max: 1337}})
+// => { name: 'lorem lor', level: 1278 }
+```
+
+<sup>*</sup> Sometimes, for some cases.
 
 ## What does it have to do with React.js?
 
