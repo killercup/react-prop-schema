@@ -40,11 +40,11 @@ ps.sample({name: {type: "string"}, level: {type: "number", max: 1337}})
 
 ## What does it have to do with React.js?
 
-I'm so glad you asked. You see, React.js has this little, often overlooked feature called [Prop Validation]. It's used during development to validate the data in you props. By default, React has some nice helper methods that should get you started, e.g. `React.PropTypes.string.isRequired`.
+I'm so glad you asked. You see, React.js has this little, often overlooked feature called [Prop Validation]. It's used during development to validate the data in your component's properties. By default, React has some nice helper methods that should get you started, e.g. `React.PropTypes.string.isRequired`.
 
-But the best thing is, you can create your own prop validators -- they are just functions that get the props and output some warning to the console.
+But the thing is, you can easily create your own prop validators -- they are just functions that get the props and output some warning to the console.
 
-So, we take our library from above and use it to crate a new validation module. Let's call it `ReactProps` for now. Then we spice things up a bit and give each validator an additional method called `fake`.
+So, of course I had to take the glorious library described above and use it to create a new validation module. I'll call it `ReactProps` for now. Then, to spice things up a bit, let's give each validator an additional method called `fake`.
 
 You can access a React component's original `propTypes` using `component.originalSpec.propTypes` (at least in React 0.10, this is probably a private API). Using this, it is trivial to call each propType's `.fake()` method and generate a new data set for your test component.
 
