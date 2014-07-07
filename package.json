@@ -1,0 +1,45 @@
+{
+  "name": "react-prop-schema",
+  "version": "0.0.1",
+  "privat": true,
+  "description": "_Experiment:_ Create a utility to check a data structure and create fake content at the same time and that works with React.js.",
+  "scripts": {
+    "test": "node test/index.js",
+    "build": "gulp --require coffee-script/register",
+    "compile": "NODE_ENV=production gulp --require coffee-script/register",
+    "watch": "gulp watch --require coffee-script/register"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/killercup/react-prop-schema"
+  },
+  "keywords": [
+    "react.js",
+    "faker"
+  ],
+  "author": "Pascal Hertleif <killercup@gmail.com> (http://pascalhertleif.de/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/killercup/react-prop-schema/issues"
+  },
+  "homepage": "https://github.com/killercup/react-prop-schema",
+  "dependencies": {
+    "coffee-script": "^1.7.1",
+    "envify": "^1.2.1",
+    "lodash": "^2.4.1",
+    "react": "^0.10.0"
+  },
+  "devDependencies": {
+    "browserify": "^4.2.0",
+    "coffeeify": "^0.6.0",
+    "envify": "^1.2.1",
+    "faker": "^1.0.0",
+    "gulp": "^3.8.5",
+    "gulp-plumber": "^0.6.3",
+    "gulp-rimraf": "^0.1.0",
+    "gulp-util": "^2.2.19",
+    "uglifyify": "^2.4.0",
+    "vinyl-source-stream": "^0.1.1",
+    "watchify": "^0.10.2"
+  }
+}
