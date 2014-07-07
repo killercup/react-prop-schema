@@ -2,6 +2,8 @@
 
 _Experiment:_ Create a utility to check a data structure and create fake content at the same time and that works with React.js.
 
+[![Build Status](https://travis-ci.org/killercup/react-prop-schema.svg)](https://travis-ci.org/killercup/react-prop-schema)
+
 ## What's so cool about this?
 
 Let's say you have a data structure, represented by the following JSON:
