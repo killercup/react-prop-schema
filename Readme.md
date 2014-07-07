@@ -42,15 +42,40 @@ ps.sample({name: {type: "string"}, level: {type: "number", max: 1337}})
 
 I'm so glad you asked. You see, React.js has this little, often overlooked feature called [Prop Validation]. It's used during development to validate the data in your component's properties. By default, React has some nice helper methods that should get you started, e.g. `React.PropTypes.string.isRequired`.
 
+[Prop Validation]: http://facebook.github.io/react/docs/reusable-components.html#prop-validation
+
 But the thing is, you can easily create your own prop validators -- they are just functions that get the props and output some warning to the console.
 
 So, of course I had to take the glorious library described above and use it to create a new validation module. I'll call it `ReactProps` for now. Then, to spice things up a bit, let's give each validator an additional method called `fake`.
 
 You can access a React component's original `propTypes` using `component.originalSpec.propTypes` (at least in React 0.10, this is probably a private API). Using this, it is trivial to call each propType's `.fake()` method and generate a new data set for your test component.
 
-You can see a complete example [here](https://github.com/killercup/react-prop-schema/blob/master/app/frontend/index.coffee).
+### Complete Example
 
-[Prop Validation]: http://facebook.github.io/react/docs/reusable-components.html#prop-validation
+See also the CoffeeScript source [here](https://github.com/killercup/react-prop-schema/blob/master/app/frontend/index.coffee).
+
+```js
+var React = require('react');
+var ReactProps = require('../utils/react_props');
+
+var Person = React.createClass({
+  // This is the important bit
+  propTypes: {
+    name: ReactProps.require({type: 'string', min: 1, max: 42}),
+    age: ReactProps.require({type: 'number', min: 21, max: 42}),
+  },
+
+  render: function () {
+    return React.DOM.article({key: 0, className: 'person'}, [
+      React.DOM.h1({key: 0, className: 'name'}, ["Dr. ", this.props.name]),
+      React.DOM.p({key: 1, className: 'age'}, ["Age: ", this.props.age])
+    ]);
+  }
+});
+
+var fakePerson = ReactProps.fake(Person, {key: 0}, []);
+React.renderComponent(fakePerson, document.getElementById('container'));
+```
 
 ## Getting this Experiment Started
 
