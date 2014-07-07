@@ -28,7 +28,7 @@ Great. There are tools for that. Nothing new. But then you want to write some te
 
 That's what this experiment is all about. I wanted to create such a validation tool which can use the same structure to create random fake sample data (better known as samples of fake-random demo-data).
 
-And: Good news, everyone! It works<sup>*</sup>!
+And: Good news, everyone! It works<sup>*</sup>! The source lives in `app/utils/`.
 
 ```js
 var ps = require('./prop_schema')
@@ -47,6 +47,8 @@ But the thing is, you can easily create your own prop validators -- they are jus
 So, of course I had to take the glorious library described above and use it to create a new validation module. I'll call it `ReactProps` for now. Then, to spice things up a bit, let's give each validator an additional method called `fake`.
 
 You can access a React component's original `propTypes` using `component.originalSpec.propTypes` (at least in React 0.10, this is probably a private API). Using this, it is trivial to call each propType's `.fake()` method and generate a new data set for your test component.
+
+You can see a complete example [here](https://github.com/killercup/react-prop-schema/blob/master/app/frontend/index.coffee).
 
 [Prop Validation]: http://facebook.github.io/react/docs/reusable-components.html#prop-validation
 
