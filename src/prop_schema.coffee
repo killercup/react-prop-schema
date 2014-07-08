@@ -55,7 +55,7 @@ TYPES =
       _min = min or 0
       _max = max or 5
       length = l.sample([_min.._max])
-      return [_min..length].map ->
+      return [1..length].map ->
         sample(schema)
 
   'boolean':
