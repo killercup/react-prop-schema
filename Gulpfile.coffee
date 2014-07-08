@@ -109,6 +109,9 @@ gulp.task 'copy:assets', ->
   gulp.src("#{PATHS.app.src}/**/*.html")
   .pipe gulp.dest PATHS.app.dest
 
+gulp.task 'copy:assets:watch', ['copy:assets'], ->
+  gulp.watch("#{PATHS.app.src}/**/*.html", ['copy:assets'])
+
 gulp.task 'scripts:vendor', ->
   compileVendorScripts
     env: ENV
@@ -136,4 +139,4 @@ gulp.task 'scripts:app:watch', ->
 
 gulp.task 'default', ['clean', 'copy:assets', 'scripts:vendor', 'scripts:app']
 
-gulp.task 'watch', ['clean', 'copy:assets', 'scripts:vendor', 'scripts:app:watch']
+gulp.task 'watch', ['clean', 'copy:assets:watch', 'scripts:vendor', 'scripts:app:watch']

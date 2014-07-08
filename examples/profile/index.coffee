@@ -6,7 +6,7 @@
 ###
 
 React = require('react')
-{article, h1, p, ul, li} = React.DOM
+{article, div, h1, p, ul, li, button} = React.DOM
 
 # Load the magic
 ReactProps = require('../../src/react_props')
@@ -15,41 +15,74 @@ ReactProps = require('../../src/react_props')
 Person = React.createClass
   displayName: 'Person'
 
-  # This is the important bit
+  # This is the important bit: Each prop key is described using ReactProps
   propTypes:
     name: ReactProps.require
       dr: {type: 'boolean'}
-      first: {type: 'string', min: 1, max: 21, required: true}
-      last: {type: 'string', min: 1, max: 42, required: true}
+      first: {type: 'string', min: 1, max: 21}
+      last: {type: 'string', min: 1, max: 42}
     bio: ReactProps.require
       type: 'string', min: 20, max: 140
     age: ReactProps.require
       type: 'number', min: 21, max: 42
     updates: ReactProps.require
-      type: 'array', min: 5, max: 10,
+      type: 'array', min: 1, max: 5,
       schema:
         body: {type: 'string', min: 1, max: 21}
         created: {type: 'date'}
 
   render: ->
-    (article {key: 0, className: 'person'}, [
-      (h1 {key: 0, className: 'name'}, [
-        (if @props.name.dr then "Dr. " else "")
-        @props.name.first
-        @props.name.last
+    (article {key: 0, className: 'person panel panel-default'}, [
+      (div {key: 0, className: 'name panel-heading'}, [
+        (h1 {key: 0, className: 'panel-title'}, [
+          (if @props.name.dr then "Dr. " else "")
+          @props.name.first
+          @props.name.last
+        ])
       ])
-      (p {key: 1, className: 'age'}, ["Age: ", @props.age])
-      (p {key: 2, className: 'bio'}, [@props.bio])
-      (ul {key: 3, className: 'updates'}, @props.updates.map (update, index) ->
-        (li {key: index, className: 'update'}, [
+      (div {key: 1, className: 'panel-body'}, [
+        (p {key: 1, className: 'age'}, ["Age: ", @props.age])
+        (p {key: 2, className: 'bio'}, [@props.bio])
+      ])
+      (ul {key: 3, className: 'updates list-group'}, @props.updates.map (update, index) ->
+        (li {key: index, className: 'update list-group-item'}, [
           update.body
           " (#{update.created.toDateString()})"
         ])
       )
     ])
 
-# Render a fake component instance it to the browser DOM.
+# Show a few random people next to each other
+People = React.createClass
+  displayName: 'People'
+
+  generatePeople: ->
+    [1..3].map (i) ->
+      (div {key: i, className: 'col-sm-4'},
+        ReactProps.fake(Person, {key: 0})
+      )
+
+  getDefaultProps: ->
+    list: @generatePeople()
+
+  render: ->
+    shuffle = =>
+      @setProps list: @generatePeople()
+
+    (div {key: 0}, [
+      (div {key: 0, className: 'row'}, [
+        (h1 {key: 0}, [
+          "People "
+          (button {key: 1, className: 'btn btn-primary', onClick: shuffle},
+            "Shuffle"
+          )
+        ])
+      ])
+      (div {key: 1, className: 'people row'}, @props.list)
+    ])
+
+# Render stuff to the DOM
 React.renderComponent(
-  (ReactProps.fake Person, {key: 0}, []),
+  (People {key: 0}, [])
   document.getElementById('container')
 )
