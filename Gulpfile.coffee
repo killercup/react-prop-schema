@@ -9,12 +9,12 @@ source = require('vinyl-source-stream')
 
 PATHS =
   app:
-    src: './app/frontend'
-    entry: './app/frontend/index.coffee'
+    src: './examples/profile'
+    entry: './examples/profile/index.coffee'
     dest: './build'
     name: 'le-app.js'
   libs:
-    entry: './app/frontend/vendor.js'
+    entry: './examples/profile/vendor.js'
     name: 'vendor.js'
     dest: './build'
 

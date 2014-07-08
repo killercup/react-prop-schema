@@ -1,7 +1,7 @@
 assert = require('assert')
 l = require('lodash')
 
-{check, sample} = require('../../app/utils/prop_schema')
+{check, sample} = require('../src/prop_schema')
 
 testSample = (schema) -> ->
   s = sample(schema)

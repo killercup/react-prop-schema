@@ -1,3 +1,4 @@
 require('coffee-script/register');
 
-require('./utils');
+require('./prop_check_spec');
+require('./prop_sample_spec');

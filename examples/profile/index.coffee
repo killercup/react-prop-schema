@@ -9,7 +9,7 @@ React = require('react')
 {article, div, h1, p} = React.DOM
 
 # Load the magic
-ReactProps = require('../utils/react_props')
+ReactProps = require('../../src/react_props')
 
 # Create an example component
 Person = React.createClass

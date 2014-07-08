@@ -28,7 +28,7 @@ Great. There are tools for that. Nothing new. But then you want to write some te
 
 That's what this experiment is all about. I wanted to create such a validation tool which can use the same structure to create random fake sample data (better known as samples of fake-random demo-data).
 
-And: Good news, everyone! It works<sup>*</sup>! The source lives in `app/utils/`.
+And: Good news, everyone! It works<sup>*</sup>! The source lives in `src/`.
 
 ```js
 var ps = require('./prop_schema')
@@ -52,7 +52,7 @@ You can access a React component's original `propTypes` using `component.origina
 
 ### Complete Example
 
-See also the CoffeeScript source [here](https://github.com/killercup/react-prop-schema/blob/master/app/frontend/index.coffee).
+See also the CoffeeScript source of [the complete profile example](https://github.com/killercup/react-prop-schema/blob/master/examples/profile/index.coffee).
 
 ```js
 var React = require('react');
