@@ -4,6 +4,21 @@ l = require('lodash')
 {check, sample} = require('../src/prop_schema')
 
 tests =
+  boolean1: ->
+    es = check false, {type: 'boolean'}
+    assert (es.length is 0), "Should validate boolean. #{es}"
+  boolean2: ->
+    es = check true, {type: 'boolean'}
+    assert (es.length is 0), "Should validate boolean. #{es}"
+  booleanInvalid: ->
+    es = check "false", {type: 'boolean', min: 21, max: 42}
+    assert (es.length > 0), "Should notice when boolean is incorrect."
+  null: ->
+    es = check null, {type: 'null'}
+    assert (es.length is 0), "Should validate null. #{es}"
+  nullInvalid: ->
+    es = check "null", {type: 'null', min: 21, max: 42}
+    assert (es.length > 0), "Should notice when null is incorrect."
   number: ->
     es = check 42, {type: 'number'}
     assert (es.length is 0), "Should validate number. #{es}"

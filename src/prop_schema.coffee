@@ -60,8 +60,10 @@ TYPES =
 
   'boolean':
     check: (val) ->
-      [] if l.isBoolean(val)
-      [new Error [val, "is not a boolean"]]
+      if l.isBoolean(val)
+        []
+      else
+        [new Error [val, "is not a boolean"]]
     sample: -> l.sample [true, false]
 
   'date':
@@ -77,14 +79,18 @@ TYPES =
 
   'function':
     check: (val) ->
-      [] if l.isFunction(val)
-      [new Error [val, "is not a function"]]
+      if l.isFunction(val)
+        []
+      else
+        [new Error [val, "is not a function"]]
     sample: -> ->
 
   'null':
     check: (val) ->
-      [] if l.isNull(val)
-      [new Error [val, "is not null"]]
+      if l.isNull(val)
+        []
+      else
+        [new Error [val, "is not null"]]
     sample: -> null
 
   'number':
@@ -102,15 +108,17 @@ TYPES =
 
     sample: ({min, max, float}) ->
       n = Math.max (min or 0), (Math.random() * (max or 100))
-      return if not float
+      if not float
         Math.ceil n
       else
         n
 
   'regexp':
     check: (val) ->
-      [] if l.isRegExp(val)
-      [new Error [val, "is not a RegExp"]]
+      if l.isRegExp(val)
+        []
+      else
+        [new Error [val, "is not a RegExp"]]
     sample: -> /^42$/
 
   'string':
