@@ -75,7 +75,7 @@ TYPES =
 
     sample: ({min, max}) ->
       # TODO: add min/max
-      return new Date()
+      return new Date Math.random() * +(new Date())
 
   'function':
     check: (val) ->
@@ -134,7 +134,7 @@ TYPES =
       return errs
 
     sample: ({pattern, min, max}) ->
-      # implement pattern using faker
+      # TODO implement pattern using faker
       lorem = "lorem "
       length = l.sample l.range(min or 0, max or 111)
       maxLorem = Math.ceil(length / lorem.length)
