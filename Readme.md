@@ -56,18 +56,23 @@ See also the CoffeeScript source of [the complete profile example](https://githu
 
 ```js
 var React = require('react');
-var ReactProps = require('../utils/react_props');
+var ReactProps = require('./src/react_props');
 
 var Person = React.createClass({
   // This is the important bit
   propTypes: {
-    name: ReactProps.require({type: 'string', min: 1, max: 42}),
+    name: ReactProps.require({
+      first: {type: 'string', min: 1, max: 42, pattern: 'Name.firstName'},
+      last: {type: 'string', min: 1, max: 42, pattern: 'Name.lastName'}
+    }),
     age: ReactProps.require({type: 'number', min: 21, max: 42}),
   },
 
   render: function () {
     return React.DOM.article({key: 0, className: 'person'}, [
-      React.DOM.h1({key: 0, className: 'name'}, ["Dr. ", this.props.name]),
+      React.DOM.h1({key: 0, className: 'name'}, [
+        "Dr. ", this.props.name.first, " ", this.props.name.last
+      ]),
       React.DOM.p({key: 1, className: 'age'}, ["Age: ", this.props.age])
     ]);
   }

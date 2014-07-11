@@ -19,8 +19,8 @@ Person = React.createClass
   propTypes:
     name: ReactProps.require
       dr: {type: 'boolean'}
-      first: {type: 'string', min: 1, max: 21}
-      last: {type: 'string', min: 1, max: 42}
+      first: {type: 'string', min: 1, max: 21, pattern: 'Name.firstName'}
+      last: {type: 'string', min: 1, max: 42, pattern: 'Name.lastName'}
     bio: ReactProps.require
       type: 'string', min: 20, max: 140
     age: ReactProps.require
@@ -36,8 +36,7 @@ Person = React.createClass
       (div {key: 0, className: 'name panel-heading'}, [
         (h1 {key: 0, className: 'panel-title'}, [
           (if @props.name.dr then "Dr. " else "")
-          @props.name.first
-          @props.name.last
+          @props.name.first, " ", @props.name.last
         ])
       ])
       (div {key: 1, className: 'panel-body'}, [

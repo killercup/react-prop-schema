@@ -13,6 +13,9 @@ tests =
   number: testSample {type: 'number'}
   numberMinMax: testSample {type: 'number', min: 21, max: 42}
   string: testSample {type: 'string'}
+  stringAddress: ->
+    s = sample type: 'string', pattern: 'Internet.email'
+    assert (l.contains s, '@'), "No @, no email."
   array: testSample {type: 'array', min: 1, max: 1, schema: {a: {type: 'number'}}}
   object: testSample {
     name: {type: 'string'}

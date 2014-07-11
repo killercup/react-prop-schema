@@ -1,5 +1,10 @@
 l = require('lodash')
 
+if process.env.NODE_ENV is 'production'
+  f = Lorem: sentence: -> "Lorem ipsum dolor sit amet."
+else
+  f = require('faker')
+
 class CheckError extends Error
   constructor: (vals) ->
     @message = vals
@@ -73,9 +78,13 @@ TYPES =
       # TODO: add min/max
       return errs
 
-    sample: ({min, max}) ->
-      # TODO: add min/max
-      return new Date Math.random() * +(new Date())
+    sample: ({min, max, pattern}) ->
+      rightNow = new Date()
+
+      if min or max
+        f.Date.between(min or 0, max or +rightNow)
+      else
+        return new Date Math.random() * +rightNow
 
   'function':
     check: (val) ->
@@ -133,17 +142,31 @@ TYPES =
         errs.push new CheckError [val, "should at most be", max, "characters"]
       return errs
 
-    sample: ({pattern, min, max}) ->
-      # TODO implement pattern using faker
-      lorem = "lorem "
-      length = l.sample l.range(min or 0, max or 111)
-      maxLorem = Math.ceil(length / lorem.length)
+    sample: ({pattern, max}) ->
+      # Expect `pattern` to be something like `Address.zipCode` or
+      # `Internet.domainName`.
+      if l.isString(pattern) and pattern.split('.').length is 2
+        contentType = pattern.split('.')
+        fakeCategory = f[contentType[0]]
+        contentFaker = fakeCategory?[contentType[1]]
 
-      lorems = l.range(0, maxLorem)
-      .map(-> lorem)
-      .join('')
+        if l.isFunction(contentFaker)
+          # Faker.js uses `this.otherFaker` a lot.
+          contentFaker = contentFaker.bind(fakeCategory)
+        else
+          console?.warn?(new Error("Can't fake string pattern #{pattern}"))
 
-      return lorems[0..length]
+      # If Faker.js does not offer this content type, fall back to Lorem Ipsum.
+      unless l.isFunction(contentFaker)
+        contentFaker = f.Lorem.sentence.bind(f.Lorem)
+
+      lorem = contentFaker()
+
+      if l.isNumber(max)
+        length = l.sample l.range(0, max)
+        return lorem[0..length]
+      else
+        return lorem
 
   'undefined':
     check: (val) ->
