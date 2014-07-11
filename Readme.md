@@ -82,6 +82,8 @@ var fakePerson = ReactProps.fake(Person, {key: 0}, []);
 React.renderComponent(fakePerson, document.getElementById('container'));
 ```
 
+Also note that elements with `type: string` support a special `pattern` property which can be set to a valid [faker.js] method (e.g. `'Internet.email'`), which will then be used to generate the fake data.
+
 ## Getting this Experiment Started
 
 Uses `gulp` and `browserify`, but you don't have to concern yourself with that. If you enjoy fiddling with that kind of stuff, though, I hope you enjoy reading it. I spend at least an hour to get it working (generating two JS files, one for my JS and one for external libraries).
