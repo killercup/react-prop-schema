@@ -6,9 +6,9 @@ A library to validate a data structure and create fake content at the same time.
 
 ## Installation / Usage
 
-This has been created to be used as a CommonJS module, using node, [browersify] or something similar. If you need a good starting point for using browserify, have a look at this project's `Gulpfile.coffee`.
+This has been created to be used as a CommonJS module, using node, [browserify] or something similar. If you need a good starting point for using browserify, have a look at this project's `Gulpfile.coffee`.
 
-Even though this libary is written in CoffeeScript, a JS version can be created using `npm run precompile`. Versions uploaded to npm will contain the JS files in `dist`.
+Even though this library is written in CoffeeScript, a JS version can be created using `npm run precompile`. Versions uploaded to _npm_ will contain the JS files in `dist`.
 
 Basically, you just need to run
 
@@ -117,7 +117,7 @@ Imaging we use the example `Person` component from above with the following prop
 Person({key: 0, age: -1, name: {first: 42}}, []);
 ```
 
-It is obvious, that neither `age` nor `name` are valid. But what exactly is wrong with them? Here is the console output you get in developement mode:
+It is obvious, that neither `age` nor `name` are valid. But what exactly is wrong with them? Here is the console output you get in development mode:
 
 > Invalid prop `age` supplied to `Person`: ["-1 should at least be 21"] [CheckError]
 
@@ -131,7 +131,7 @@ Uses `gulp` and `browserify`, but you don't have to concern yourself with that. 
 
 ```sh
 $ npm install
-$ npm run compile # or build to skip uglify and add sourcemaps
+$ npm run compile # or `build` to skip uglify and add sourcemaps
 $ open build/index.html # works on os x at least
 ```
 
@@ -153,7 +153,7 @@ $ npm test
 
 ## Code Style
 
-Uses CoffeeScript and lodash, because then I can get stuff done wicked fast.
+Uses _CoffeeScript_ and _lodash_, because then I can get stuff done wicked fast.
 
 ## Further Ideas
 
