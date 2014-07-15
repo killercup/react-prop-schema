@@ -1,3 +1,10 @@
+###!
+# # Schema-based Porperty Validation
+#
+# @author Pascal Hertleif
+# @license MIT
+###
+
 l = require('lodash')
 
 if process.env.NODE_ENV is 'production'

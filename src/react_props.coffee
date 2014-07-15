@@ -1,5 +1,8 @@
-###
+###!
 # # React.js Compatible Data Structure Validation
+#
+# @author Pascal Hertleif
+# @license MIT
 ###
 
 l = require('lodash')

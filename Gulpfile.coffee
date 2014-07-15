@@ -17,6 +17,9 @@ PATHS =
     entry: './examples/profile/vendor.js'
     name: 'vendor.js'
     dest: './build'
+  src:
+    src: './src/**/*.coffee'
+    dest: './dist'
 
 LIBS = require(PATHS.libs.entry)
 
@@ -136,6 +139,11 @@ gulp.task 'scripts:app:watch', ->
     dest: PATHS.app.dest
     libs: LIBS
     watch: true
+
+gulp.task 'precompile', ->
+  gulp.src(PATHS.src.src)
+  .pipe require('gulp-coffee')()
+  .pipe gulp.dest(PATHS.src.dest)
 
 gulp.task 'default', ['clean', 'copy:assets', 'scripts:vendor', 'scripts:app']
 
