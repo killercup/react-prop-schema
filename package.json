@@ -1,11 +1,11 @@
 {
   "name": "react-prop-schema",
   "version": "0.1.0",
-  "description": "_Experiment:_ Create a utility to check a data structure and create fake content at the same time and that works with React.js.",
+  "description": "A library to validate a data structure and create fake content at the same time. Works great with React.js.",
   "main": "index.js",
   "browser": "index.js",
   "scripts": {
-    "test": "node test/index.js",
+    "test": "NODE_ENV=test node test/index.js",
     "build": "gulp --require coffee-script/register",
     "compile": "NODE_ENV=production gulp --require coffee-script/register",
     "watch": "gulp watch --require coffee-script/register",

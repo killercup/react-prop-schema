@@ -1,6 +1,6 @@
 # React Prop Schema
 
-_Experiment:_ Create a utility to check a data structure and create fake content at the same time and that works with React.js.
+A library to validate a data structure and create fake content at the same time. Works great with React.js and can be used to replace `React.PropTypes`.
 
 [![Build Status](https://travis-ci.org/killercup/react-prop-schema.svg)](https://travis-ci.org/killercup/react-prop-schema)
 
@@ -13,16 +13,19 @@ Even though this libary is written in CoffeeScript, a JS version can be created 
 Basically, you just need to run
 
 ```bash
-$ npm install --save killercup/react-prop-schema
+$ npm install --save react-prop-schema
 ```
 
 and then you should be able to `require('react-prop-schema')` in your code.
 
 ### Use in Production
 
-If you use [browserify], you should compile your code with `envify` and `uglifyify` (so you can get rid of dead code).
+If you use [browserify], you should compile your code with `envify` and `uglifyify` for production (so you can get rid of dead code).
 
-Especially, this omits loading [faker.js] if you set `NODE_ENV=production`.
+Please note that if you set `NODE_ENV=production`, this:
+
+- prevents loading and embedding [faker.js], saving you about 140kB of bandwidth
+- mutes all validation warnings (but does not remove validation code)
 
 [browserify]: http://browserify.org/
 
@@ -106,6 +109,22 @@ React.renderComponent(fakePerson, document.getElementById('container'));
 
 Also note that elements with `type: string` support a special `pattern` property which can be set to a valid [faker.js] method (e.g. `'Internet.email'`), which will then be used to generate the fake data.
 
+### Precise Validation Error
+
+Imaging we use the example `Person` component from above with the following props:
+
+```js
+Person({key: 0, age: -1, name: {first: 42}}, []);
+```
+
+It is obvious, that neither `age` nor `name` are valid. But what exactly is wrong with them? Here is the console output you get in developement mode:
+
+> Invalid prop `age` supplied to `Person`: ["-1 should at least be 21"] [CheckError]
+
+> Invalid prop `name` supplied to `Person`: ["42 is not a string.", "last is required but not in [object Object]"] [Array[1], CheckError]
+
+(The arrays at the end of the lines contain the actual, nested JS Errors that can be inspected in developer tools like Chrome's inspector and that contain further information, like a reference to the value that failed to validate.)
+
 ## Getting this Experiment Started
 
 Uses `gulp` and `browserify`, but you don't have to concern yourself with that. If you enjoy fiddling with that kind of stuff, though, I hope you enjoy reading it. I spend at least an hour to get it working (generating two JS files, one for my JS and one for external libraries).
@@ -122,9 +141,9 @@ You can use `npm run watch` to automatically recompile stuff when you change som
 
 ## Run the Tests
 
-I write some tests to determine that the validator/faker works as expected.
+I wrote some tests to determine that the validator/faker works as expected.
 
-Believe it or not, I wrote an amazing new test utility for this. I'll probably call it 'try-catch-foreach' or something.
+Believe it or not, I even wrote an amazing new test utility for this. I'll probably call it 'try-catch-foreach' or something and will replace it with _mocha_ later on.
 
 Run the tests with:
 
