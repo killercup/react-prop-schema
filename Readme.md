@@ -4,6 +4,28 @@ _Experiment:_ Create a utility to check a data structure and create fake content
 
 [![Build Status](https://travis-ci.org/killercup/react-prop-schema.svg)](https://travis-ci.org/killercup/react-prop-schema)
 
+## Installation / Usage
+
+This has been created to be used as a CommonJS module, using node, [browersify] or something similar. If you need a good starting point for using browserify, have a look at this project's `Gulpfile.coffee`.
+
+Even though this libary is written in CoffeeScript, a JS version can be created using `npm run precompile`. Versions uploaded to npm will contain the JS files in `dist`.
+
+Basically, you just need to run
+
+```bash
+$ npm install --save killercup/react-prop-schema
+```
+
+and then you should be able to `require('react-prop-schema')` in your code.
+
+### Use in Production
+
+If you use [browserify], you should compile your code with `envify` and `uglifyify` (so you can get rid of dead code).
+
+Especially, this omits loading [faker.js] if you set `NODE_ENV=production`.
+
+[browserify]: http://browserify.org/
+
 ## What's so cool about this?
 
 Let's say you have a data structure, represented by the following JSON:

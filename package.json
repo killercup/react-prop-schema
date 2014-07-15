@@ -1,7 +1,6 @@
 {
   "name": "react-prop-schema",
-  "version": "0.0.1",
-  "privat": true,
+  "version": "0.1.0",
   "description": "_Experiment:_ Create a utility to check a data structure and create fake content at the same time and that works with React.js.",
   "main": "index.js",
   "browser": "index.js",
