@@ -5,7 +5,8 @@
   "main": "index.js",
   "browser": "index.js",
   "scripts": {
-    "test": "NODE_ENV=test node test/index.js",
+    "lint": "coffeelint {src,test}/*.coffee",
+    "test": "npm run lint && NODE_ENV=test node test/index.js",
     "build": "gulp --require coffee-script/register",
     "compile": "NODE_ENV=production gulp --require coffee-script/register",
     "watch": "gulp watch --require coffee-script/register",
@@ -36,6 +37,7 @@
   "devDependencies": {
     "browserify": "^4.2.0",
     "coffeeify": "^0.6.0",
+    "coffeelint": "^1.5.2",
     "envify": "^1.2.1",
     "gulp": "^3.8.5",
     "gulp-coffee": "^2.1.1",

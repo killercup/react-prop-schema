@@ -49,9 +49,11 @@ TYPES =
 
       errs = []
       if l.isNumber(min) and val.length < min
-        errs.push new CheckError [val, "of length", val.length, "should at least have", min, "entries"]
+        errs.push new CheckError [val, "of length", val.length, \
+          "should at least have", min, "entries"]
       if l.isNumber(max) and val.length > max
-        errs.push new CheckError [val, "of length", val.length, "should at most have", max, "entries"]
+        errs.push new CheckError [val, "of length", val.length, \
+          "should at most have", max, "entries"]
 
       if schema
         entriesErrs = l.compact l.map val, (entry) ->

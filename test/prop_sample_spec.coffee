@@ -16,7 +16,11 @@ tests =
   stringAddress: ->
     s = sample type: 'string', pattern: 'Internet.email'
     assert (l.contains s, '@'), "No @, no email."
-  array: testSample {type: 'array', min: 1, max: 1, schema: {a: {type: 'number'}}}
+  array: testSample
+    type: 'array',
+    min: 1, max: 1,
+    schema:
+      a: {type: 'number'}
   object: testSample {
     name: {type: 'string'}
     awesomeness: {type: 'number'}
