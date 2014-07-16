@@ -5,7 +5,7 @@
   "main": "index.js",
   "browser": "index.js",
   "scripts": {
-    "lint": "coffeelint {src,test}/*.coffee",
+    "lint": "coffeelint src/*.coffee test/*.coffee",
     "test": "npm run lint && NODE_ENV=test node test/index.js",
     "build": "gulp --require coffee-script/register",
     "compile": "NODE_ENV=production gulp --require coffee-script/register",
