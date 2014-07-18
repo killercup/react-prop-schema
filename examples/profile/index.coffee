@@ -51,22 +51,22 @@ Person = React.createClass
       )
     ])
 
+generatePeople = (n=3) ->
+  [1..n].map (i) ->
+    (div {key: i, className: 'col-sm-4'},
+      ReactProps.fake(Person, {key: 0})
+    )
+
 # Show a few random people next to each other
 People = React.createClass
   displayName: 'People'
 
-  generatePeople: ->
-    [1..3].map (i) ->
-      (div {key: i, className: 'col-sm-4'},
-        ReactProps.fake(Person, {key: 0})
-      )
-
   getDefaultProps: ->
-    list: @generatePeople()
+    list: generatePeople()
 
   render: ->
     shuffle = =>
-      @setProps list: @generatePeople()
+      @setProps list: generatePeople()
 
     (div {key: 0}, [
       (div {key: 0, className: 'row'}, [
