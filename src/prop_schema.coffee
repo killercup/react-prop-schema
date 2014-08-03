@@ -151,7 +151,7 @@ TYPES =
         errs.push new CheckError [val, "should at most be", max, "characters"]
       return errs
 
-    sample: ({pattern, max}) ->
+    sample: ({pattern, max, min}) ->
       # Expect `pattern` to be something like `Address.zipCode` or
       # `Internet.domainName`.
       if l.isString(pattern) and pattern.split('.').length is 2
@@ -170,6 +170,10 @@ TYPES =
         contentFaker = f.Lorem.sentence.bind(f.Lorem)
 
       lorem = contentFaker()
+
+      if l.isNumber(min)
+        while min > lorem.length
+          lorem += contentFaker()
 
       if l.isNumber(max)
         length = l.sample l.range(0, max)

@@ -6,13 +6,16 @@ l = require('lodash')
 testSample = (schema) -> ->
   s = sample(schema)
   es = check s, schema
-  errs = l.flatten(es).map (e) -> e.message
+  errs = l.flatten(es).map (e) -> e.message?.join?(' ') or e
   assert (es.length is 0), errs
 
 tests =
   number: testSample {type: 'number'}
   numberMinMax: testSample {type: 'number', min: 21, max: 42}
   string: testSample {type: 'string'}
+  stringMin: testSample {type: 'string', min: 20}
+  stringMax: testSample {type: 'string', max: 20}
+  stringMinMax: testSample {type: 'string', min: 21, max: 42}
   stringAddress: ->
     s = sample type: 'string', pattern: 'Internet.email'
     assert (l.contains s, '@'), "No @, no email."
