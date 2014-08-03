@@ -8,7 +8,6 @@
 l = require('lodash')
 PropSchema = require('./prop_schema')
 
-
 warn = ->
 if process.env.NODE_ENV isnt 'production' and console?.warn?
   warn = (args...) ->
@@ -29,19 +28,18 @@ createPropChecks = (required, schema) ->
   checker = (props, propName, componentName, location) ->
     value = props[propName]
     if required and not value
-      warn new Error(
+      return new Error(
         "Required prop `#{propName}` was not specified in " +
         "`#{componentName or 'anonymous component'}`."
       )
     else
       errors = validator(value)
       if errors.length
-        warn(
+        return new Error([
           "Invalid prop `#{propName}` supplied to " +
           "`#{componentName or 'anonymous component'}` at #{location}:",
-          (l.flatten(errors).map (e) -> e.message?.join(' ') or e),
-          errors
-        )
+          (l.flatten(errors).map (e) -> e.message?.join?(' ') or e)
+        ])
 
   checker.fake = -> PropSchema.sample(schema)
 
