@@ -43,6 +43,9 @@ tests =
   stringMinMaxInvalid2: ->
     es = check "hi there my dear friend", {type: 'string', min: 5, max: 10}
     assert (es.length > 0), "Should notice when string is too long."
+  stringMinMaxWrong: ->
+    es = check "hi there my dear friend", {type: 'string', min: 42, max: 21}
+    assert (es.length > 0), "Should notice when string is too long."
   invalidString: ->
     es = check 42, {type: "string"}
     assert (es.length > 0), "Should notice invalid string."

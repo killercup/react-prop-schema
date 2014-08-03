@@ -145,6 +145,8 @@ TYPES =
         return [new CheckError [val, "is not a string."]]
       errs = []
       _len = val.length
+      if l.isNumber(min) and l.isNumber(max) and min >= max
+        errs.push new CheckError ["Prop min is larger than prop max"]
       if l.isNumber(min) and _len < min
         errs.push new CheckError [val, "should at least be", min, "characters"]
       if l.isNumber(max) and _len > max
@@ -175,8 +177,9 @@ TYPES =
         while min > lorem.length
           lorem += contentFaker()
 
-      if l.isNumber(max)
-        length = l.sample l.range(0, max)
+      min = if l.isNumber(min) then min else 0
+      if l.isNumber(max) and max >= min
+        length = l.sample l.range(min, max)
         return lorem[0..length]
       else
         return lorem
