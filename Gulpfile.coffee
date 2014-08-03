@@ -67,10 +67,10 @@ compileVendorScripts = ({name, dest, env, libs}) ->
   .pipe plumber()
   .on 'end', -> log(TASK)("recompiled")
 
-  ###
-  # @method Compile Application Scripts
-  # @description Bundle application files
-  ###
+###
+# @method Compile Application Scripts
+# @description Bundle application files
+###
 compileScripts = ({src, name, dest, libs, env, watch}) ->
   TASK = "browserify:app#{if watch then ':watch' else ''}"
 

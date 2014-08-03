@@ -1,4 +1,5 @@
 examples/
 test/
 build/
+docs/
 *.sublime-project
