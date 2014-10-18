@@ -10,7 +10,8 @@
     "build": "gulp --require coffee-script/register",
     "compile": "NODE_ENV=production gulp --require coffee-script/register",
     "watch": "gulp watch --require coffee-script/register",
-    "prepublish": "gulp precompile --require coffee-script/register"
+    "prepublish": "gulp precompile --require coffee-script/register",
+    "docs": "grock"
   },
   "repository": {
     "type": "git",
@@ -35,10 +36,10 @@
     "react": "~0.11.2"
   },
   "devDependencies": {
-    "browserify": "^4.2.0",
+    "browserify": "^6.1.0",
     "coffeeify": "^0.7.0",
     "coffeelint": "^1.6.0",
-    "envify": "^1.2.1",
+    "envify": "^3.0.0",
     "gulp": "^3.8.8",
     "gulp-coffee": "^2.2.0",
     "gulp-plumber": "^0.6.6",

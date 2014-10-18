@@ -72,7 +72,7 @@ People = React.createClass
     (div {key: 0}, [
       (div {key: 0, className: 'row'}, [
         (h1 {key: 0}, [
-          "People "
+          "The People of Randomia "
           (button {key: 1, className: 'btn btn-primary', onClick: shuffle},
             "Shuffle"
           )

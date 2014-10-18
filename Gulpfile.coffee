@@ -49,7 +49,9 @@ compileVendorScripts = ({name, dest, env, libs}) ->
   TASK = 'browserify:vendor'
 
   bundler = require('browserify')
-    entries: libs.entry, extensions: ['.js', '.coffee']
+    entries: libs.entry
+    extensions: ['.js', '.coffee']
+    debug: env.debug
 
   bundler.transform require('coffeeify')
 
@@ -60,7 +62,7 @@ compileVendorScripts = ({name, dest, env, libs}) ->
   libs.forEach (lib) ->
     bundler.require(lib)
 
-  bundler.bundle(debug: env.debug)
+  bundler.bundle()
   .on 'error', log(TASK, 'err')
   .pipe source(name)
   .pipe gulp.dest(dest)
@@ -74,11 +76,14 @@ compileVendorScripts = ({name, dest, env, libs}) ->
 compileScripts = ({src, name, dest, libs, env, watch}) ->
   TASK = "browserify:app#{if watch then ':watch' else ''}"
 
-  action = if watch then require('watchify') else require('browserify')
-  
-  bundler = action
-    entries: src,
+  bundler = require('browserify')
+    cache: {}, packageCache: {}, fullPaths: true
+    entries: src
     extensions: ['.js', '.json', '.coffee']
+    debug: env.debug
+
+  if watch
+    bundler = require('watchify')(bundler)
 
   bundler.transform require('coffeeify')
 
@@ -90,7 +95,7 @@ compileScripts = ({src, name, dest, libs, env, watch}) ->
     bundler.external(lib)
 
   rebundle = ->
-    bundler.bundle(debug: env.debug)
+    bundler.bundle()
     .on 'error', log(TASK, 'err')
     .pipe source(name)
     .pipe plumber()
