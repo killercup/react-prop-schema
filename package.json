@@ -1,6 +1,6 @@
 {
   "name": "react-prop-schema",
-  "version": "0.2.0",
+  "version": "1.0.0",
   "description": "A library to validate a data structure and create fake content at the same time. Works great with React.js.",
   "main": "index.js",
   "browser": "index.js",
