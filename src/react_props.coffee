@@ -27,11 +27,12 @@ createPropChecks = (required, schema) ->
 
   checker = (props, propName, componentName, location) ->
     value = props[propName]
-    if required and not value
-      return new Error(
-        "Required prop `#{propName}` was not specified in " +
-        "`#{componentName or 'anonymous component'}`."
-      )
+    if not value?
+      if required
+        return new Error(
+          "Required prop `#{propName}` was not specified in " +
+          "`#{componentName or 'anonymous component'}`."
+        )
     else
       errors = validator(value)
       if errors.length
