@@ -17,7 +17,7 @@ tests =
   stringMax: testSample {type: 'string', max: 20}
   stringMinMax: testSample {type: 'string', min: 21, max: 42}
   stringAddress: ->
-    s = sample type: 'string', pattern: 'Internet.email'
+    s = sample type: 'string', pattern: 'internet.email'
     assert (l.contains s, '@'), "No @, no email."
   array: testSample
     type: 'array',

@@ -169,7 +169,7 @@ TYPES =
 
       # If Faker.js does not offer this content type, fall back to Lorem Ipsum.
       unless l.isFunction(contentFaker)
-        contentFaker = f.Lorem.sentence.bind(f.Lorem)
+        contentFaker = f.lorem.sentence.bind(f.lorem)
 
       lorem = contentFaker()
 
