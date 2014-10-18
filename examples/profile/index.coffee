@@ -19,8 +19,8 @@ Person = React.createClass
   propTypes:
     name: ReactProps.require
       dr: {type: 'boolean'}
-      first: {type: 'string', min: 1, max: 21, pattern: 'Name.firstName'}
-      last: {type: 'string', min: 1, max: 42, pattern: 'Name.lastName'}
+      first: {type: 'string', min: 1, max: 21, pattern: 'name.firstName'}
+      last: {type: 'string', min: 1, max: 42, pattern: 'name.lastName'}
     bio: ReactProps.require
       type: 'string', min: 20, max: 140
     age: ReactProps.require
@@ -43,11 +43,12 @@ Person = React.createClass
         (p {key: 1, className: 'age'}, ["Age: ", @props.age])
         (p {key: 2, className: 'bio'}, [@props.bio])
       ])
-      (ul {key: 3, className: 'updates list-group'}, @props.updates.map (update, index) ->
-        (li {key: index, className: 'update list-group-item'}, [
-          update.body
-          " (#{update.created.toDateString()})"
-        ])
+      (ul {key: 3, className: 'updates list-group'},
+        @props.updates.map (update, index) ->
+          (li {key: index, className: 'update list-group-item'}, [
+            update.body
+            " (#{update.created.toDateString()})"
+          ])
       )
     ])
 

@@ -154,8 +154,8 @@ TYPES =
       return errs
 
     sample: ({pattern, max, min}) ->
-      # Expect `pattern` to be something like `Address.zipCode` or
-      # `Internet.domainName`.
+      # Expect `pattern` to be something like `address.zipCode` or
+      # `internet.domainName`.
       if l.isString(pattern) and pattern.split('.').length is 2
         contentType = pattern.split('.')
         fakeCategory = f[contentType[0]]
@@ -165,7 +165,8 @@ TYPES =
           # Faker.js uses `this.otherFaker` a lot.
           contentFaker = contentFaker.bind(fakeCategory)
         else
-          console?.warn?(new Error("Can't fake string pattern #{pattern}"))
+          error = new Error("Can't fake string pattern #{pattern}")
+          console?.warn?(error.stack or error)
 
       # If Faker.js does not offer this content type, fall back to Lorem Ipsum.
       unless l.isFunction(contentFaker)
