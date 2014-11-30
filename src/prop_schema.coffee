@@ -91,7 +91,7 @@ TYPES =
       rightNow = new Date()
 
       if min or max
-        f.Date.between(min or 0, max or +rightNow)
+        f.date.between(min or 0, max or +rightNow)
       else
         return new Date Math.random() * +rightNow
 
